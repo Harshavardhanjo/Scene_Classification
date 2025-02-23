@@ -13,6 +13,16 @@ BASE_PATH = './data'
 TRAIN_PATH = os.path.join(BASE_PATH, 'train')
 MODEL_PATH = './models'
 
+# Scene categories mapping
+SCENE_CATEGORIES = {
+    0: 'buildings',
+    1: 'forest',
+    2: 'glacier',
+    3: 'mountain',
+    4: 'sea',
+    5: 'street'
+}
+
 def print_progress(message):
     """Print progress with timestamp"""
     timestamp = datetime.now().strftime("%H:%M:%S")
@@ -74,19 +84,20 @@ def predict_single_image(model, image_path, show_image=True):
         predictions = model.predict(img)
         predicted_class = np.argmax(predictions[0])
         confidence = predictions[0][predicted_class]
+        scene_category = SCENE_CATEGORIES[predicted_class]
         
         print(f"\nPrediction Results:")
-        print(f"Class: {predicted_class}")
+        print(f"Scene: {scene_category}")
         print(f"Confidence: {confidence:.2%}")
         
         if show_image:
             plt.figure(figsize=(8, 6))
             plt.imshow(mpimg.imread(image_path))
-            plt.title(f"Predicted: Class {predicted_class} ({confidence:.2%})")
+            plt.title(f"Predicted: {scene_category} ({confidence:.2%})")
             plt.axis('off')
             plt.show()
             
-        return predicted_class, confidence
+        return scene_category, confidence
         
     except Exception as e:
         print(f"Error during prediction: {str(e)}")
@@ -111,6 +122,7 @@ def predict_test_set(model, output_file='predictions.csv'):
                 predicted_class = np.argmax(pred[0])
                 predictions.append({
                     'image_name': row['image_name'],
+                    'predicted_scene': SCENE_CATEGORIES[predicted_class],
                     'predicted_class': predicted_class,
                     'confidence': pred[0][predicted_class]
                 })

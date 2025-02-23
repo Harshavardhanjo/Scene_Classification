@@ -9,7 +9,7 @@ from datetime import datetime
 # Configuration
 IMG_SIZE = 224
 BATCH_SIZE = 32
-EPOCHS = 10
+EPOCHS = 3
 BASE_PATH = './data'
 TRAIN_PATH = os.path.join(BASE_PATH, 'train')
 MODEL_PATH = './models'
