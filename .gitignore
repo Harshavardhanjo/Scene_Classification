@@ -1,0 +1,52 @@
+# Create .gitignore file
+echo "# Conda environment
+env/
+venv/
+ENV/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# VS Code
+.vscode/
+*.code-workspace
+.history
+
+# Model files
+*.h5
+*.hdf5
+models/
+
+# Data
+data/
+
+# Mac OS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Logs
+logs/
+*.log" > .gitignore
